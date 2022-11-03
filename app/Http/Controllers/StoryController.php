@@ -56,6 +56,18 @@ class StoryController extends Controller
     }
 
     /**
+     * Display the specified resource by slug.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function showBySlug(string $slug)
+    {
+        $story = Story::where('slug', $slug)->first();
+        return $story->makeHidden(['category_id', 'user_id']);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
