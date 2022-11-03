@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Story;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,7 +17,8 @@ class StoryController extends Controller
      */
     public function index()
     {
-        return Story::all();
+        $stories = Story::latest()->get();
+        return $stories->makeHidden(['category_id', 'user_id']);
     }
 
     /**
@@ -50,7 +52,7 @@ class StoryController extends Controller
      */
     public function show(Story $story)
     {
-        return $story;
+        return $story->makeHidden(['category_id', 'user_id']);
     }
 
     /**
