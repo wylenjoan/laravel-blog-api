@@ -9,6 +9,8 @@ class Story extends Model
 {
     use HasFactory;
 
+    protected $with = ['author:id,name,username', 'category:id,name,slug'];
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
