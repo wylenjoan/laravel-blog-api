@@ -49,6 +49,28 @@ class CategoryController extends Controller
     }
 
     /**
+     * Display the specified resource by slug.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function showBySlug(string $slug)
+    {
+        return Category::firstWhere('slug', $slug);
+    }
+
+    /**
+     * Display the specified resource by slug with stories relations.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function showBySlugWithStories(string $slug)
+    {
+        return $this->showBySlug($slug)->with('stories')->first();
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
