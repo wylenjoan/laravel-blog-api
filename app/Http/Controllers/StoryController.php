@@ -63,7 +63,7 @@ class StoryController extends Controller
      */
     public function showBySlug(string $slug)
     {
-        $story = Story::where('slug', $slug)->first();
+        $story = Story::where('slug', $slug)->firstOrFail();
         return $story->makeHidden(['category_id', 'user_id']);
     }
 

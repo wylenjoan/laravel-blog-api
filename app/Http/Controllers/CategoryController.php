@@ -56,7 +56,7 @@ class CategoryController extends Controller
      */
     public function showBySlug(string $slug)
     {
-        return Category::firstWhere('slug', $slug);
+        return Category::where('slug', $slug)->firstOrFail();
     }
 
     /**

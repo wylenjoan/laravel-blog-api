@@ -40,7 +40,7 @@ class UserController extends Controller
      */
     public function showByUsername(string $username)
     {
-        return User::firstWhere('username', $username);
+        return User::where('username', $username)->firstOrFail();
     }
 
     /**
