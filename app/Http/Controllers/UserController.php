@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Story;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Validation\Rule;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
@@ -27,6 +30,28 @@ class UserController extends Controller
     public function show($id)
     {
         return User::find($id);
+    }
+
+    /**
+     * Display the specified resource by username.
+     *
+     * @param  string  $username
+     * @return \Illuminate\Http\Response
+     */
+    public function showByUsername(string $username)
+    {
+        return User::firstWhere('username', $username);
+    }
+
+    /**
+     * Display the specified resource by username with stories relations.
+     *
+     * @param  string  $username
+     * @return \Illuminate\Http\Response
+     */
+    public function showByUsernameWithStories(string $username)
+    {
+        return $this->showByUsername($username)->with('stories')->first();
     }
 
     /**
@@ -59,6 +84,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return User::destroy($id);
+        User::destroy($id);
+        
+        return Response(['message'=> 'User deleted'], Response::HTTP_OK);
     }
 }
