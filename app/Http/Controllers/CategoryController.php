@@ -67,7 +67,7 @@ class CategoryController extends Controller
      */
     public function showBySlugWithStories(string $slug)
     {
-        return $this->showBySlug($slug)->with('stories')->first();
+        return Category::where('slug', $slug)->with('stories')->firstOrFail();
     }
 
     /**

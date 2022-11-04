@@ -51,7 +51,7 @@ class UserController extends Controller
      */
     public function showByUsernameWithStories(string $username)
     {
-        return $this->showByUsername($username)->with('stories')->first();
+        return User::where('username', $username)->with('stories')->firstOrFail();
     }
 
     /**
