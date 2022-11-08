@@ -86,7 +86,7 @@ class StoryController extends Controller
 
         $story->update($attributes);
 
-        return $story;
+        return $story->makeHidden(['category_id', 'user_id']);
     }
 
     /**
